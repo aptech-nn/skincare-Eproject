@@ -1,0 +1,136 @@
+body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(180deg, #ffdce2 0%, #ffe0f0 100%);
+      color: #6d3d6d;
+    }
+
+    header {
+      background: linear-gradient(90deg, #ffb6c1, #ffc0cb);
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      color: white;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-size: cover;
+      background-position: center;
+      animation: slideBackground 15s infinite;
+      z-index: -1;
+      filter: brightness(0.6);
+    }
+
+    @keyframes slideBackground {
+      0% { background-image: url(../imgs/sb.png); }
+      33% { background-image: url('../imgs/sbg1.png'); }
+      66% { background-image: url('../imgs/sbg2.png'); }
+      100% { background-image: url('../imgs/sbg3.png'); }
+    }
+
+    .section-title {
+      font-weight: bold;
+      color: #d77fa1;
+      margin-bottom: 2rem;
+    }
+
+    .about-section {
+      background-color: #fff4f7;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .about-img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .btn-pastel {
+      background-color: #e892a2;
+      color: white;
+      border: none;
+    }
+
+    .btn-pastel:hover {
+      background-color: #da7890;
+    }
+
+    .pastel-card {
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 20px rgba(255, 192, 203, 0.4); /* soft pink glow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #fce4ec; /* soft pink border */
+}
+
+.pastel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(255, 182, 193, 0.5); /*glow on hover */
+}
+
+.navbar {
+      background-color: #ffc5d0;
+    }
+
+    .navbar-brand {
+      color: #d77fa1;
+      font-weight: bold;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .text-dirty-pink {
+  color: #d16b86 !important; /* Dirty Pink */
+}
+.clinic-section {
+      padding: 2.5rem 0;
+    }
+
+    .containerr {
+      background: linear-gradient(to right, #ffe4ec, #fbeaff);
+      padding: 4rem 0;
+      text-align: center;
+      border-radius: 3rem 3rem 0 0;
+      box-shadow: 0 4px 20px rgba(255, 182, 193, 0.4);
+    }
+
+    .btn-pastel {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background-color: #ffc5d0;   
+  color: #7a3f58;              
+  border: none;
+  border-radius: 12px;        
+  font-size: 0.875rem;        
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-pastel:hover {
+  background-color: #ff9fb3; 
+  color: white;
+}
+
+/* navbar toggle hover add in all with navbar*/
+  .navbar-nav .nav-link:hover {
+    background-color: #ff9fb3;
+    color: #d63384 !important;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  @media (max-width: 991.98px) {
+    .navbar-nav .nav-link:hover {
+      background-color: #ffe9f0;
+      color: #d63384 !important;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  }
+

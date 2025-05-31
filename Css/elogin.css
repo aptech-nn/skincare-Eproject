@@ -1,0 +1,65 @@
+body {
+            font-family: 'Playfair Display', serif;
+            background-color: #fff0f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .loginFrom {
+            width: 100%;
+            max-width: 500px;
+            margin: 60px auto;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 0 5px 5px rgba(206, 117, 206, 0.863);
+            border-radius: 1rem 1rem 1rem 1rem;
+        }
+
+        h2 {
+            text-align: center;
+            color: #d63384;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e055a0;
+        }
+
+        footer {
+      background-color: #fce4ec;
+      padding: 2rem 0;
+      text-align: center;
+      color: #d63384;
+    }
+    label, input {
+      display: block;
+      margin: 10px 0;
+    }

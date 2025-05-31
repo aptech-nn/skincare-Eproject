@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | Pastel Skincare🌺</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./favicon/apple-touch-icon(2).png"
+      sizes="96x96"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!--Custom CSS for above bscss -->
+    <link href="./Css/product.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="#"
+          ><img src="./favicon/favicon(2).ico" alt="" /> Pastel Skincare</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNavbar"
+          aria-controls="mainNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html" onclick="showLoader()"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./AboutUs.html" onclick="showLoader()"
+                >About us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./gallery.html" onclick="showLoader()"
+                >Gallery</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#products" onclick="showLoader()"
+                >Products</a
+              >
+            </li>
+            <!-- <li class="nav-item">
+            <a class="nav-link" href="./OrderPage.html">Item List</a>
+          </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="./contactus.html">Contact Us</a>
+            </li>
+          </ul>
+          <button
+            class="btn btn-light ms-3 position-relative"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#cartSidebar"
+            aria-controls="cartSidebar"
+          >
+            <i class="bi bi-cart3"></i> Cart
+
+            <!--  count bubbs -->
+            <span
+              id="cart-count"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style="display: none"
+            >
+              0
+              <span class="visually-hidden">items in cart</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- DIV FOR CART -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Your Cart</h5>
+        <!--dismiss offcanvas -->
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul id="cartItems" class="list-group mb-3"></ul>
+        <h6>Total: $<span id="totalPrice">0.00</span></h6>
+        <!-- Proper click-->
+        <a href="./OrderPage.html" class="btn btn-pastel mt-3 w-100"
+          >Checkout</a
+        >
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+      <h1 class="display-4">Pastel Skincare</h1>
+      <p class="lead">Nurture your skin with the soft touch of pastels</p>
+      <button class="btn btn-pastel mt-3" onclick="scrollToProducts()">
+        View Products
+      </button>
+    </header>
+
+    <!-- DIV -->
+    <div class="container my-5" id="products">
+      <div class="container category-buttons">
+        <button class="btn btn-pastel" onclick="renderProducts('all')">
+          All
+        </button>
+        <button class="btn btn-pastel" onclick="renderProducts('toner')">
+          Toners
+        </button>
+        <button class="btn btn-pastel" onclick="renderProducts('cleanser')">
+          Cleansers
+        </button>
+        <button class="btn btn-pastel" onclick="renderProducts('moisturizer')">
+          Moisturizers
+        </button>
+        <button class="btn btn-pastel" onclick="renderProducts('best')">
+          Best Sellers
+        </button>
+      </div>
+      <div class="row g-4" id="productGrid">
+        <!-- Add More Product cards, switched to java for better visual appeal-->
+      </div>
+    </div>
+
+    <!-- SCRIPT STARTS HERWE -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const productData = [
+        {
+          name: "Rose Toner",
+          price: 12.99,
+          category: "toner",
+          image: "imgs/rose2.png.png",
+          description:
+            "Hydrates and refreshes your skin with natural rose extract.",
+        },
+        {
+          name: "Peach Cleanser",
+          price: 15.99,
+          category: "cleanser",
+          image: "imgs/gudpeach.png.png",
+          description:
+            "Gently cleanses while leaving your skin soft and peachy-fresh.",
+        },
+        {
+          name: "Lavender Moisturizer",
+          price: 18.99,
+          category: "best",
+          image: "imgs/lave2.png.png",
+          description:
+            "Soothes and hydrates with calming lavender for all-day comfort.",
+        },
+        {
+          name: "Mint Cleanser",
+          price: 14.99,
+          category: "cleanser",
+          image: "imgs/mint1.png.png",
+          description:
+            "Refreshing minty formula that purifies and cools your skin.",
+        },
+        {
+          name: "Chamomile Toner",
+          price: 11.99,
+          category: "best",
+          image: "imgs/CToner2.png.png",
+          description:
+            "Balances and calms skin with the gentle power of chamomile.",
+        },
+        {
+          name: "Vanilla Moisturizer",
+          price: 19.99,
+          category: "moisturizer",
+          image: "imgs/vanilla2.png.png",
+          description:
+            "Rich vanilla hydration that melts into your skin for a silky glow.",
+        },
+        {
+          name: "Aloe Vera Gel",
+          price: 10.99,
+          category: "moisturizer",
+          image: "imgs/alovera.png.png",
+          sale: true,
+          description:
+            "Cooling gel packed with aloe to soothe, heal, and hydrate.",
+        },
+        {
+          name: "Coconut Cleanser",
+          price: 13.49,
+          category: "cleanser",
+          image: "imgs/cococlen1.png.png",
+          sale: false,
+          description:
+            "Creamy coconut formula that removes impurities and softens skin.",
+        },
+        {
+          name: "Berry Blast Scrub",
+          price: 16.99,
+          category: "best",
+          image: "imgs/bbb.png.png",
+          sale: true,
+          description:
+            "Fruit-packed exfoliator that leaves your skin smooth and glowing.",
+        },
+        {
+          name: "Sunflower Day Cream",
+          price: 21.99,
+          category: "moisturizer",
+          image: "imgs/sun2.png.png",
+          sale: false,
+          description:
+            "Nourishing day cream with sunflower extract for radiant skin.",
+        },
+        // add moreeeeeee also read array and strings
+        {
+          name: "Daily Glow Sunscreen",
+          price: 16.99,
+          category: "best",
+          image: "imgs/sun.png",
+          description:
+            "Lightweight SPF 50+ protection that leaves your skin glowing.",
+        },
+        {
+          name: "Tea Tree Foam Cleanser",
+          price: 15.49,
+          category: "cleanser",
+          image: "imgs/ttfomcln.png.png",
+          sale: false,
+          description:
+            "Deep-cleansing foam with tea tree oil to fight blemishes and refresh skin.",
+        },
+        {
+          name: "HydraBoost Gel Cream",
+          price: 20.99,
+          category: "moisturizer",
+          image: "imgs/hydra.png.png",
+          sale: true,
+          description:
+            "Water-light gel cream that delivers intense hydration without the heaviness.",
+        },
+        {
+          name: "Pink Clay Face Mask",
+          price: 17.99,
+          category: "best",
+          image: "imgs/clay1.png.png",
+          sale: false,
+          description:
+            "Detoxifying pink clay mask that purifies pores and brightens your complexion.",
+        },
+        // more added :>, see if it works
+        {
+          name: "Witch Hazel Toner",
+          price: 13.99,
+          category: "toner",
+          image: "imgs/witch1.png.png",
+          description: "Clarifying toner with natural astringents.",
+        },
+        {
+          name: "Green Tea Toner",
+          price: 14.49,
+          category: "toner",
+          image: "imgs/gtt.png.png",
+          description: "Soothing toner rich in antioxidants.",
+        },
+        {
+          name: "Lavender Mist Toner",
+          price: 15.29,
+          category: "toner",
+          image: "imgs/lavt1.png.png",
+          description: "A calming lavender-infused hydrating mist.",
+        },
+        // copied same above for Best Sellers
+        {
+          name: "Witch Hazel Toner",
+          price: 13.99,
+          category: "best",
+          image: "imgs/witch2.png.png",
+          description: "Clarifying toner with natural astringents.",
+        },
+        {
+          name: "Green Tea Toner",
+          price: 14.49,
+          category: "best",
+          image: "imgs/gtt2.png.png",
+          description: "Soothing toner rich in antioxidants.",
+        },
+        {
+          name: "Lavender Mist Toner",
+          price: 15.29,
+          category: "best",
+          image: "imgs/lavt2.png.png",
+          description: "A calming lavender-infused hydrating mist.",
+        },
+      ];
+
+      const productGrid = document.getElementById("productGrid");
+
+      function renderProducts(filter = "all") {
+        productGrid.innerHTML = "";
+        const filtered =
+          filter === "all"
+            ? productData
+            : productData.filter((p) => p.category === filter);
+        filtered.forEach((product) => {
+          const col = document.createElement("div");
+          col.className = "col-md-4 product-card";
+          col.setAttribute("data-category", product.category);
+
+          // Check if the item is already in the cart
+          const isInCart = cart[product.name];
+          const quantity = isInCart ? cart[product.name].qty : 0;
+
+          col.innerHTML = `
+    <div class="card position-relative">
+    ${
+      product.sale
+        ? '<span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>'
+        : ""
+    }
+    <span class="badge bg-secondary position-absolute top-0 end-0 m-2 text-capitalize">${
+      product.category
+    }</span>
+    <img src="${product.image}" class="card-img-top" alt="${product.name}">
+    <div class="card-body">
+        <h5 class="card-title">${product.name}</h5>
+        <p class="card-text text-muted">
+            ${
+              product.sale
+                ? `<del>$${(product.price * 1.2).toFixed(
+                    2
+                  )}</del> <strong class="text-danger">$${product.price.toFixed(
+                    2
+                  )}</strong>`
+                : `$${product.price.toFixed(2)}`
+            }
+        </p>
+        <button class="btn btn-pastel mt-2 w-100 add-btn" ${
+          isInCart ? 'style="display:none;"' : ""
+        } onclick="addToBag('${product.name}', ${
+            product.price
+          }, this)">Add to Bag</button>
+        <div class="quantity-controls mt-2" ${
+          isInCart ? "" : 'style="display:none;"'
+        }>
+            <button onclick="decrement(this)">-</button>
+            <span>${quantity}</span>
+            <button onclick="increment(this)">+</button>
+        </div>
+    </div>
+    ${
+      product.description
+        ? `<div class="description-hover">${product.description}</div>`
+        : ""
+    }
+</div>
+
+`;
+
+          productGrid.appendChild(col);
+          observer.observe(col);
+        });
+      }
+
+      function filterCategory(category) {
+        renderProducts(category);
+      }
+
+      function scrollToProducts() {
+        document
+          .getElementById("products")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function increment(btn) {
+        const span = btn.previousElementSibling;
+        const card = btn.closest(".card");
+        const title = card.querySelector(".card-title").textContent;
+        const price = parseFloat(
+          card.querySelector(".text-muted").textContent.replace(/[^0-9.]/g, "")
+        );
+
+        let quantity = parseInt(span.textContent) + 1;
+        span.textContent = quantity;
+        updateCart(title, price, quantity);
+      }
+
+      function decrement(btn) {
+        const span = btn.nextElementSibling;
+        const card = btn.closest(".card");
+        const title = card.querySelector(".card-title").textContent;
+        const price = parseFloat(
+          card.querySelector(".text-muted").textContent.replace(/[^0-9.]/g, "")
+        );
+
+        let quantity = parseInt(span.textContent);
+        if (quantity > 0) quantity--;
+        span.textContent = quantity;
+        updateCart(title, price, quantity);
+      }
+
+      const cart = {};
+
+      function updateCart(name, price, qty) {
+        if (qty === 0) {
+          delete cart[name];
+        } else {
+          cart[name] = { price, qty };
+        }
+
+        renderCart();
+        updateCartCount();
+      }
+      function updateCartCount() {
+        const cartCountEl = document.getElementById("cart-count");
+        let totalItems = 0;
+        for (const item in cart) {
+          totalItems += cart[item].qty;
+        }
+        cartCountEl.textContent = totalItems;
+        cartCountEl.style.display = totalItems > 0 ? "inline-block" : "none";
+      }
+
+      function addToBag(name, price, button) {
+        cart[name] = { price, qty: 1 };
+        renderCart();
+        alert(`${name} added to your bag!`);
+
+        const card = button.closest(".card-body");
+        button.style.display = "none";
+        const quantityControls = card.querySelector(".quantity-controls");
+        quantityControls.style.display = "flex";
+        quantityControls.querySelector("span").textContent = "1";
+      }
+
+      function renderCart() {
+        const cartItems = document.getElementById("cartItems");
+        cartItems.innerHTML = "";
+        let total = 0;
+        for (const item in cart) {
+          const { price, qty } = cart[item];
+          const li = document.createElement("li");
+          li.className =
+            "list-group-item d-flex justify-content-between align-items-center";
+          li.innerHTML = `${item} <span>${qty} x $${price.toFixed(2)}</span>`;
+          cartItems.appendChild(li);
+          total += price * qty;
+        }
+        document.getElementById("totalPrice").textContent = total.toFixed(2);
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      renderProducts();
+    </script>
+
+    <!-- loader animation add for the other pages too-->
+    <script>
+      function showLoader() {
+        document.getElementById("loader-wrapper").style.display = "flex";
+      }
+    </script>
+    <script>
+      window.addEventListener("load", () => {
+        const loader = document.getElementById("loader-wrapper");
+        loader.style.opacity = "0";
+        setTimeout(() => (loader.style.display = "none"), 700);
+      });
+    </script>
+
+    <!-- Testimonials Section from ChatGPT for aesthetic purposes ASK SIR -->
+    <div class="container my-5">
+      <h2 class="text-center section-title mb-4">What Our Customers Say</h2>
+      <div
+        id="testimonialCarousel"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner text-center">
+          <div class="carousel-item active">
+            <blockquote class="blockquote">
+              <p>
+                "Absolutely love the Rose Toner! My skin feels refreshed and
+                smells amazing."
+              </p>
+              <footer class="blockquote-footer">
+                Emily, <cite title="Source Title">Skincare Enthusiast</cite>
+              </footer>
+            </blockquote>
+          </div>
+          <div class="carousel-item">
+            <blockquote class="blockquote">
+              <p>
+                "The Lavender Moisturizer is my nighttime ritual now. Gentle and
+                soothing."
+              </p>
+              <footer class="blockquote-footer">
+                Jasmine, <cite title="Source Title">Beauty Blogger</cite>
+              </footer>
+            </blockquote>
+          </div>
+          <div class="carousel-item">
+            <blockquote class="blockquote">
+              <p>
+                "Peach Cleanser is the only product I use now. It's that good!"
+              </p>
+              <footer class="blockquote-footer">
+                Liam, <cite title="Source Title">Verified Buyer</cite>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#testimonialCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#testimonialCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container containerr text-center text-md-start">
+        <div class="p-5 text-center rounded">
+          <h2 class="section-title">Stay Glowing!</h2>
+          <p class="mb-4">
+            Subscribe to get updates on new arrivals and skincare tips.
+          </p>
+
+          <form
+            class="row g-3 justify-content-center"
+            onsubmit="event.preventDefault(); alert('Thank you for subscribing! ✨');"
+          >
+            <div class="col-md-6 col-sm-12">
+              <input
+                type="email"
+                class="form-control pastel-input"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-pastel">Subscribe</button>
+            </div>
+          </form>
+
+          <div class="row text-center text-md-start mt-5">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h5 class="text-uppercase mb-4 font-weight-bold text-danger">
+                <img src="./favicon/favicon(1).ico" alt="" /> Pastel Skincare
+              </h5>
+              <p class="p2">
+                Luxury skincare & spa services crafted just for you. Feel the
+                glow, every day.
+              </p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <h5 class="text-uppercase mb-4 font-weight-bold text-danger">
+                Quick Links
+              </h5>
+              <p>
+                <a
+                  href="./index.html"
+                  class="text-dirty-pink text-decoration-none"
+                  >Home</a
+                >
+              </p>
+              <p>
+                <a
+                  href="./AboutUs.html"
+                  class="text-dirty-pink text-decoration-none"
+                  >Services</a
+                >
+              </p>
+              <p>
+                <a
+                  href="./gallery.html"
+                  class="text-dirty-pink text-decoration-none"
+                  >Gallery</a
+                >
+              </p>
+              <p>
+                <a
+                  href="./feedback.html"
+                  class="text-dirty-pink text-decoration-none"
+                  >Feedback</a
+                >
+              </p>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h5 class="text-uppercase mb-4 font-weight-bold text-danger">
+                Contact
+              </h5>
+              <p><i class="bi bi-house-door-fill"></i> Karachi, Pakistan</p>
+              <p><i class="bi bi-envelope-fill"></i> mmbeauty@example.com</p>
+              <p><i class="bi bi-telephone-fill"></i> +92 300 1234567</p>
+            </div>
+
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-3">
+              <h5 class="text-uppercase mb-4 font-weight-bold text-danger">
+                Follow us
+              </h5>
+              <a
+                href="https://www.facebook.com/"
+                class="text-dirty-pink me-4 fs-5"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/"
+                class="text-dirty-pink me-4 fs-5"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a href="https://x.com/" class="text-dirty-pink me-4 fs-5"
+                ><i class="bi bi-twitter"></i
+              ></a>
+              <a
+                href="https://www.tiktok.com/login"
+                class="text-dirty-pink me-4 fs-5"
+                ><i class="bi bi-tiktok"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom strip -->
+      <footer class="text-center py-4 mt-0" style="background-color: #ffe9f0">
+        <p class="mb-0">
+          &copy; 2025 Pastel Skincare – Lovingly crafted with care and pastel
+          vibes.
+        </p>
+      </footer>
+    </footer>
+    <!-- Loader -->
+    <div id="loader-wrapper">
+      <div class="heart"></div>
+      <div class="loader-text">Loading Pastel Magic...</div>
+      <div
+        class="fading-flower"
+        style="top: 20%; left: 25%; animation-delay: 1s"
+      ></div>
+      <div
+        class="fading-flower"
+        style="top: 40%; left: 70%; animation-delay: 2s"
+      ></div>
+      <div
+        class="fading-flower"
+        style="top: 60%; left: 50%; animation-delay: 3s"
+      ></div>
+    </div>
+
+    <script src="./Js/product.js"></script>
+  </body>
+</html>
